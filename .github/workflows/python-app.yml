@@ -23,6 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
-      id: correr test
+      id: correr-test
       run: 
         python -m unittest discover tests
