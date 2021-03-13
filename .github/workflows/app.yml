@@ -47,3 +47,17 @@ jobs:
         run:  |
           coverage run -m unittest discover tests
           coverage report -m
+  merge-main:  
+    needs: test-branch
+    name: Merge master into release after a PR is merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: merge
+        uses: mtanzi/action-automerge@v1
+        id: merge
+        with:
+          github_token: ${{ github.token }}
+          source: 'release-notes-2'
+          target: 'main'
