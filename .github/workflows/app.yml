@@ -22,6 +22,7 @@ jobs:
         with:
           branch: 'release-notes-2'
   test-branch:
+    needs: build
     name: prueba
     runs-on: ubuntu-latest
     steps:
