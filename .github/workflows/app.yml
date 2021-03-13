@@ -6,6 +6,8 @@ name: Python application
 on:
   push:
     branches: [ test2 ]
+  tags:
+    -'r*'
 
 jobs:
   build:
@@ -20,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'release-notes-2'
+          branch: 'release-notes-3'
   test-branch:
     needs: build
     name: prueba
@@ -59,5 +61,5 @@ jobs:
         id: merge
         with:
           github_token: ${{ github.token }}
-          source: 'release-notes-2'
+          source: 'release-notes-3'
           target: 'main'
