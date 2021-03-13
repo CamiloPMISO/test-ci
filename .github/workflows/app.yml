@@ -6,8 +6,8 @@ name: Python application
 on:
   push:
     branches: [ test2 ]
-  tags:
-    -'r*'
+    tags:
+      -'r*'
 
 jobs:
   build:
