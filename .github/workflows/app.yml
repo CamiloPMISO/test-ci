@@ -6,6 +6,8 @@ name: Python application
 on:
   push:
     branches: [ test2 ]
+    tags:
+      -'r*'
 
 jobs:
   build:
@@ -20,8 +22,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'release-notes-2'
+          branch: 'release-notes-3'
   test-branch:
+    needs: build
     name: prueba
     runs-on: ubuntu-latest
     steps:
@@ -46,3 +49,17 @@ jobs:
         run:  |
           coverage run -m unittest discover tests
           coverage report -m
+  merge-main:  
+    needs: test-branch
+    name: Merge master into release after a PR is merged
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: merge
+        uses: mtanzi/action-automerge@v1
+        id: merge
+        with:
+          github_token: ${{ github.token }}
+          source: 'release-notes-3'
+          target: 'main'
