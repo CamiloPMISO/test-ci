@@ -23,7 +23,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'release-notes-4'
+          branch: 'release-notes-5'
   # test-branch:
   #   needs: build
   #   name: prueba
